@@ -107,7 +107,11 @@ struct node *add_data_certain_pos(struct node *head, int data, int pos) {
   ptr1->link = ptr2;
   return head;
 }
+struct node *free_entire_list(struct ndoe *head){
+  struct node* ptr=NULL;
+  
 
+}
 
 int main(void) {
   struct node *head = NULL;
