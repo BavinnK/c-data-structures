@@ -47,6 +47,7 @@ struct node *delete_final_node(struct node *head) {
   }
   else if(head->link==NULL){
     free(head);
+    head=NULL;
     return head;
   }
 
@@ -68,6 +69,7 @@ struct node* ptr=NULL;
   }
   else if(head->link==NULL){
     free(head);
+    head=NULL;
     return head;
   }
   
@@ -85,7 +87,7 @@ struct node* ptr=NULL;
 }
 struct node *add_data_certain_pos(struct node *head, int data, int pos) {
   if(pos==1){
-    //head=add_data_beg(head,data);
+    head=add_data_beg(head,data);
     return head;
   }
   struct node *ptr1 = head;
@@ -106,6 +108,7 @@ struct node *add_data_certain_pos(struct node *head, int data, int pos) {
   return head;
 }
 
+
 int main(void) {
   struct node *head = NULL;
   printf("before\n ");
@@ -118,7 +121,7 @@ int main(void) {
   head = add_data_end(head, 500);
   head = add_data_certain_pos(head, 6, 6);
 
-  // delete_list_final(head);
+  
   print(head);
   
 printf("after\n ");
