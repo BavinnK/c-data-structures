@@ -107,8 +107,28 @@ struct node *add_data_certain_pos(struct node *head, int data, int pos) {
   ptr1->link = ptr2;
   return head;
 }
-struct node *free_entire_list(struct ndoe *head){
+struct node *delete_entire_list(struct node *head){
   struct node* ptr=NULL;
+  if(head==NULL){
+    printf("no data to delete");
+    return head;
+  }
+  else if(head->link==NULL){
+    free(head);
+    head=NULL; // we do this everytime because of dangling pointer becarful!!!!!!!!!!!!!!!
+    return head;
+  
+  }
+  ptr=head;
+  while(head->link!=NULL){
+    head=head->link;
+    free(ptr);
+    ptr=head;
+  }
+  free(head);
+  head=NULL;
+  ptr=NULL;
+  return head;
   
 
 }
@@ -128,9 +148,9 @@ int main(void) {
   
   print(head);
   
-printf("after\n ");
-  head=delete_first_node(head);
-  head=delete_first_node(head);
+printf("\nafter\n ");
+head=delete_entire_list(head);
+  
   print(head);
 
   return 0;
