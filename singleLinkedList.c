@@ -45,6 +45,10 @@ struct node *delete_final_node(struct node *head) {
     printf("no data to delete!!");
     return NULL;
   }
+  else if(head->link==NULL){
+    free(head);
+    return head;
+  }
 
   ptr1 = head;
 
@@ -55,6 +59,29 @@ struct node *delete_final_node(struct node *head) {
   free(ptr1->link);
   ptr1->link = NULL;
   return head;
+}
+struct node * delete_first_node(struct node * head){
+struct node* ptr=NULL;
+  if(head==NULL){
+    printf("no data to delete! ");
+    return head;
+  }
+  else if(head->link==NULL){
+    free(head);
+    return head;
+  }
+  
+    ptr=head;
+    head=head->link;
+    ptr->link=NULL;
+    free(ptr);
+    ptr=NULL;
+   
+
+
+  
+   return head;
+
 }
 struct node *add_data_certain_pos(struct node *head, int data, int pos) {
   if(pos==1){
@@ -81,6 +108,7 @@ struct node *add_data_certain_pos(struct node *head, int data, int pos) {
 
 int main(void) {
   struct node *head = NULL;
+  printf("before\n ");
   head = add_data_end(head, 10);
   head = add_data_end(head, 20);
   head = add_data_end(head, 30);
@@ -89,7 +117,13 @@ int main(void) {
   head = add_data_beg(head, 200);
   head = add_data_end(head, 500);
   head = add_data_certain_pos(head, 6, 6);
+
   // delete_list_final(head);
+  print(head);
+  
+printf("after\n ");
+  head=delete_first_node(head);
+  head=delete_first_node(head);
   print(head);
 
   return 0;
