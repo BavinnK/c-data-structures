@@ -84,7 +84,32 @@ void reverse_print(struct node* head){
 
   }
 }
+struct node* delete_last_node(struct node* head){
+  struct node* ptr1=NULL;
+  struct node* ptr2=NULL;
+  if(head==NULL){
+    printf("there is no data to delete");
+    return head;
+  }
+  else if(head->next==NULL){
+    free(head);
+    head=NULL;
+    return head;
+  }
+  else{
+    ptr1=head;
+    while(ptr1->next!=NULL){
+      ptr1=ptr1->next;
+    }
+    ptr2=ptr1->prev;
+    ptr2->next=NULL;
+    free(ptr1);
+    ptr1=NULL;
+    
+  }
+  return head;
 
+}
 int main(void) {
   struct node*head=NULL;
   head=add_data_beg(head, 10);
@@ -93,9 +118,15 @@ int main(void) {
   head=add_data_end(head, 30);
   head=add_data_beg(head, 20);
   head=add_data_beg(head, 880);
+  head=add_data_end(head, 45);
   print(head);
   printf("\n");
   reverse_print(head);
+  
+  head=delete_last_node(head);
+  printf("\nafter deletion!\n");
+  print(head);
+  
   
   return 0;
 }
