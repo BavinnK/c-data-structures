@@ -49,7 +49,7 @@ struct node* add_data_end(struct node* head,int data){
 void print(struct node *head) {
   struct node *ptr = NULL;
   if (head == NULL) {
-    printf("no data to print");
+    printf("\nno data to print\n");
   }
   ptr = head;
   while (ptr != NULL) {
@@ -148,6 +148,11 @@ struct node* delete_node_position(struct node* head,int position){
     {
       ptr1=ptr1->next;
       position--;
+      if(ptr1==NULL){
+        printf("\nthat node position deosnt doesnt exist try again!\n ");
+        ptr1=NULL;
+        return head;
+      }
       
     }
     if(ptr1->next==NULL){
@@ -162,6 +167,31 @@ struct node* delete_node_position(struct node* head,int position){
     
 
   }
+}
+struct node* free_entire_list(struct node *head){
+  struct node* ptr1=NULL;
+  if(head==NULL){
+    printf("no data to free! ");
+    return head;
+  }
+  else if(head->next==NULL){
+    free(head);
+    head=NULL;
+    return head;
+  }
+  else{
+    ptr1=head;
+    while(head->next!=NULL){
+      head=head->next;
+      free(ptr1);
+      ptr1=head;
+    }
+    head=NULL;
+    ptr1=NULL;
+    return head;
+    
+  }
+
 }
 int main(void) {
   struct node*head=NULL;
@@ -185,7 +215,9 @@ int main(void) {
   print(head);
   # endif
 printf("\nafter deletion!\n");
- head=delete_node_position(head,7);
+ head=delete_node_position(head,9);
+ print(head);
+ head=free_entire_list(head);
  print(head);
   return 0;
 }
