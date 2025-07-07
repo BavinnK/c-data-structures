@@ -4,6 +4,7 @@ struct node{
     int data;
     struct node* next;
 };
+// this function is used when the list has no node 
 struct node* addToEmpty(struct node* tail,int data){
     
     struct node * ptr1=(struct node *)malloc(sizeof(struct node));
@@ -14,6 +15,7 @@ struct node* addToEmpty(struct node* tail,int data){
     
     
 }
+// adding a node at the begginning
 struct node* add_node_beg(struct node* tail,int data){
     if(tail==NULL){
         tail=addToEmpty(tail,data);
@@ -28,6 +30,7 @@ struct node* add_node_beg(struct node* tail,int data){
     }
 
 }
+// printing the entire list
 void  print(struct node* tail)
 {
     struct node* ptr1=NULL;
@@ -50,6 +53,7 @@ void  print(struct node* tail)
     
 
 }
+// adding a node at the ned of the list
 struct node* add_node_end(struct node* tail,int data){
     
     if (tail==NULL)
@@ -68,6 +72,7 @@ struct node* add_node_end(struct node* tail,int data){
     
     
 }
+// list creation
 struct node* create_list(struct node* tail){
     int n,data;
     printf("how many nodes you want to add: ");
@@ -85,21 +90,72 @@ struct node* create_list(struct node* tail){
     return tail;
     
 }
+// deleting the first node
+struct node* delete_beg_node(struct node* tail){
+    if(tail==NULL){
+        printf("there is no data to delete");
+        return tail;
+    }
+    else if(tail->next==tail){
+        free(tail);
+        tail=NULL;
+        return tail;
+    }
+    else {
+        struct node* ptr=tail->next;
+        tail->next=ptr->next;
+        free(ptr);
+        ptr=NULL; // becareful we have to give it null cuz of dangling pointer
+        return tail;
 
-
+    }
+}
+//deleting the last node of the list
+struct node* delete_end_node(struct node* tail){
+    if(tail==NULL){
+        printf("there is no data to delete");
+        return tail;
+    }
+    else if(tail->next==tail){
+        free(tail);
+        tail=NULL;
+        return tail;
+    }
+    else{
+        struct node * ptr=tail->next;
+        while (ptr->next!=tail)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=tail->next;
+        free(tail);
+        tail=ptr;
+        return tail;
+        
+    }
+}
 
 int main(void){
     struct node* tail=NULL;
-    #if 0
+    #if 1
+    printf("\nbefore delete\n");
     tail = addToEmpty(tail, 10);
     tail = add_node_beg(tail, 20);
     tail = add_node_beg(tail, 30);
     tail=add_node_end(tail,40);
     tail=add_node_end(tail,100);
     tail=add_node_end(tail,20);
+    tail=add_node_end(tail,99);
+    
     print(tail);
+    printf("\nafter delete\n");
+   // tail=delete_beg_node(tail);
+   tail=delete_end_node(tail);
+    print(tail);
+
+
     #endif
-    tail=create_list(tail);
-    print(tail);
+    //tail=create_list(tail);
+    //print(tail);
     return 0;
 }
