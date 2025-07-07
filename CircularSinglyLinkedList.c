@@ -134,6 +134,39 @@ struct node* delete_end_node(struct node* tail){
         
     }
 }
+//this function deletes a specific node given by the user
+struct node* delete_at_pos(struct node* tail,int pos){
+    if(tail==NULL){
+        printf("there is no data to delete");
+        return tail;
+    }
+    else if(pos==1){
+        tail=delete_beg_node(tail);
+        return tail;
+    }
+    else{
+
+        struct node * ptr1=tail->next;
+        struct node * ptr2=NULL;
+        
+        while (pos>2)
+        {
+            ptr1=ptr1->next;
+            pos--;
+            
+        }
+        ptr2=ptr1->next;
+        ptr1->next=ptr2->next;
+        free(ptr2);
+        ptr2=NULL;
+        return tail;
+
+        
+
+    }
+
+
+}
 
 int main(void){
     struct node* tail=NULL;
@@ -150,7 +183,10 @@ int main(void){
     print(tail);
     printf("\nafter delete\n");
    // tail=delete_beg_node(tail);
-   tail=delete_end_node(tail);
+   //tail=delete_end_node(tail);
+   //tail=delete_at_pos(tail,7);
+   //tail=delete_at_pos(tail,3);
+   tail=delete_at_pos(tail,30);
     print(tail);
 
 
