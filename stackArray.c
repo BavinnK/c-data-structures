@@ -62,7 +62,13 @@ void print_data(){
     
     
 }
-
+void peek(){
+    if(isEMPTY()){
+        printf("no data to print! ");
+    }
+    
+    printf("\nTop data-> %d",stack_array[top]);
+}
 
 
 
@@ -70,8 +76,11 @@ int main(void){
     int data;
     push(3);
     push(7);
+    push(8);
+    push(26);
     data=pop();
     print_data();
+    peek();
     
     return 0;
 }
